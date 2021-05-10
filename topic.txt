@@ -1,0 +1,4 @@
+Topic: Simulation of Echoplex Tape Transport
+Description: 
+The various forces acting on the tape produce a tape speed which varies somewhat over time. This varying tape speed results in a fluctuating time delay, which adds to the character of the delayed signal. Our work is to simulate the tape which has  fluctuating delay.
+The method is to combine 3 delay functions to generate our target delay.  The 3 functions are: 1. Delay control set by users as basic delay; 2. White Gaussian Noise passing low-pass filter; 3. Sinusoid Generation. After generation of target delay, we use circular buffer and Lagrange interpolation to implement it.
