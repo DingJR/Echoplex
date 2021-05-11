@@ -31,7 +31,7 @@ p = pyaudio.PyAudio()
 stream = p.open(format      = pyaudio.paInt16,
                 channels    = 1,
                 rate        = RATE,
-                input       = True,
+                input       = False,
                 output      = True )
 
 echoPlex = echo(gain=0.4, sustain=0.8, timeDelay=0.06, RATE=RATE)
@@ -77,10 +77,10 @@ S2 = Tk.Scale(root,
   length = 200, orient = Tk.HORIZONTAL, 
   from_ = 1, to = 100,
   command = updateSustain,
-  variable = sustain, label = 'sustain')
+  variable = sustain, label = 'Sustain')
 S3 = Tk.Scale(root,
   length = 200, orient = Tk.HORIZONTAL, 
-  from_ = 1, to = 1000,
+  from_ = 1, to = 120,
   command = updateDelay,
   variable = mydelay, label = 'Main Delay')
 L1 = Tk.Label(root, text="Echoplex")

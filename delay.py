@@ -63,10 +63,10 @@ class delay:
         whiteNoiseSamples = self.whiteNoiseSamples
         lpfNoise = self.lpfNoise
         rs = self.rs
-        tau = 0.01
+        tau = 0.5
         # To simulate nominal delay
         lb = math.e**(-1.0/(tau * RATE))
-        vpre = (1 - lb) * controlDelay + lb * vpre
+        vpre = lb * vpre + (1 - lb) * controlDelay
 
         # Sinusoid generation to simulate Pinch wheel
         g0 = 0.0006  / (math.e**((0.2-controlDelay)/controlDelay))# gain

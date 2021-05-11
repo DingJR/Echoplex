@@ -12,7 +12,7 @@ class echo:
         ## Need code: Change to delay system
         p1_time = timeDelay + 0.0
         p2_time = timeDelay + 0.06
-        p3_time = timeDelay + 0.06
+        p3_time = timeDelay + 0.12
         self.gain = gain
         self.sustain = sustain
         self.p_time = [p1_time, p2_time, p3_time]
@@ -49,7 +49,7 @@ class echo:
     def setMainDelay(self, timeDelay=0.06):
         p1_time = timeDelay + 0.0
         p2_time = timeDelay + 0.06
-        p3_time = timeDelay + 0.06
+        p3_time = timeDelay + 0.12
         self.p_time = [p1_time, p2_time, p3_time]
     
     def setVolumn(self, Gain=0.8):
