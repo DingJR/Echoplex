@@ -11,7 +11,7 @@ from myfunctions import clip16
 from delay import delay
 from echo import echo
 
-wavfile = 'author.wav'
+wavfile = 'piano1.wav'
 wf = wave.open( wavfile, 'rb')
 
 # Read wave file properties
@@ -43,8 +43,8 @@ root = Tk.Tk()
 sustain = Tk.IntVar()			# Define Tk variable
 volumn  = Tk.IntVar()			# Define Tk variable
 mydelay   = Tk.IntVar()			# Define Tk variable
-sustain.set(80)  					# Initilize
-volumn.set(80)  					# Initilize
+sustain.set(30)  					# Initilize
+volumn.set(30)  					# Initilize
 mydelay.set(60)  					# Initilize
 CONTINUE = True
 def my_quit():
@@ -92,16 +92,21 @@ S1.pack()
 S2.pack()
 S3.pack()
 
+output = wave.open("outputFile.wav", 'wb')
+output.setnchannels(CHANNELS)			# two channels (stereo)
+output.setsampwidth(WIDTH)			# two bytes per sample (16 bits per sample)
+output.setframerate(RATE)			# samples per second
+
 # Loop through wave file 
-LEN = 100000000
+#LEN = 100000000
 for n in range(0, LEN):
     # Get sample from wave file
-    #input_bytes = wf.readframes(1)
     root.update()
-    input_bytes = stream.read(1)
+    #input_bytes = stream.read(1, exception_on_overflow=False)
+    input_bytes = wf.readframes(1)
 
     # Convert string to number
-    x0, = struct.unpack('h', input_bytes)
+    x0,  = struct.unpack('h', input_bytes)
 
     if CONTINUE:
         y0 = echoPlex.move(x0, idx=n)
@@ -113,8 +118,10 @@ for n in range(0, LEN):
 
     # Write output to audio stream
     stream.write(output_bytes)
+    output.writeframes(output_bytes)
 
 stream.stop_stream()
 stream.close()
+output.close()
 p.terminate()
 wf.close()
