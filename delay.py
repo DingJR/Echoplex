@@ -44,7 +44,7 @@ class runningSum:
             
 
 class delay:
-    def __init__(self, RATE=8000, timeDelay=0.06):
+    def __init__(self, RATE, timeDelay=0.06):
         self.RATE = RATE
         self.rs = runningSum(int(timeDelay * RATE))
         self.vpre = timeDelay # Used for delay control
@@ -63,10 +63,11 @@ class delay:
         whiteNoiseSamples = self.whiteNoiseSamples
         lpfNoise = self.lpfNoise
         rs = self.rs
-        tau = 0.5
+        tau = 1
         # To simulate nominal delay
         lb = math.e**(-1.0/(tau * RATE))
         vpre = lb * vpre + (1 - lb) * controlDelay
+        self.vpre = vpre
 
         # Sinusoid generation to simulate Pinch wheel
         g0 = 0.0006  / (math.e**((0.2-controlDelay)/controlDelay))# gain
@@ -84,5 +85,4 @@ class delay:
         delayTime = vpre + sinDelay + tensionerDelay
         rs.write(delayTime)
         delayTime = rs.getSum(int(RATE * controlDelay))
-        self.vpre = vpre
         return delayTime

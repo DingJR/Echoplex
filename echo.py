@@ -20,7 +20,7 @@ class echo:
         self.BUFFER_LEN = int(RATE * 2) + 2
         self.buffer = self.BUFFER_LEN * [0]
         self.wr = [0, 0, 0, int(0.5 * self.BUFFER_LEN) + 1]
-        self.delaySys = [delay(timeDelay=self.p_time[0]), delay(timeDelay=self.p_time[1]), delay(timeDelay=self.p_time[2])]
+        self.delaySys = [delay(RATE=RATE, timeDelay=self.p_time[0]), delay(RATE=RATE, timeDelay=self.p_time[1]), delay(RATE=RATE, timeDelay=self.p_time[2])]
         for i in range(3):
             self.wr[i] = self.wr[3] - int(self.delaySys[i].getDelay(controlDelay=self.p_time[i], idx=0) * RATE)
 
