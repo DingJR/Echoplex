@@ -10,12 +10,16 @@ Tape echoes work by recording sound on a magnetic tape, and playing back. The ta
 
 ## Echo Player System
 The main system flow of the echoplex is like below:
+
 ![Echoplex System Flow](./echo_flow.JPG)
+
 The final gui looks like this, we can use `TurnOn` and `TurnOff` to turn on the echoplex system or just output the input. And we can use `Volumn` to set the output volumn, `Sustain` to set the devaying degree of each echo and `delay` to determine the controlled delay.
+
 ![Echoplex](./gui.JPG)
 
 ## Delay System
 And in order to completely simulate the real-word delay time, we use 3 parts to constrcut `Delay` function. The first part is basic contrled delay which set by user. The second part is sinusoid change which is introduced by capstan and pinch wheel(2 components of Echo Tape). And the third part is white gaussian noise which is caused by tensioner(componenet of Echo Tape) friction. The delay system is like below:
+
 ![Delay System Flow](./delay_flow.JPG)
 
 
@@ -42,14 +46,17 @@ From frequency analysis of real echoplex, we know that the magnitude of 22Hz and
 $$d_s(n) = 0.001(sin(\frac{2\pi *22 * n}{f_s}) + sin(\frac{2\pi *3.5* n}{f_s}))$$
 
 And combine contrled delay and sinusoid delay, we can have below delay time:
+
 ![Delay Sinusoid](./delay_sin.png)
 
 ### White Gaussian Noise
 
 The easiest way to apply low-pass-filter to white-Gaussian-noise is to let several consecutive points share the same noise. So instead of generate a white noise every point, we generate a noise every $50$ points. After combine 3 parts of delay, we can have our combined delay system:
+
 ![Delay combine](./delay_combine.png)
 
 To better see the slight change of delay, we use substrct-mean figure(Some offset between each delay line is for display convenience).
+
 ![Delay combine](./delay_combine_am.png)
 
 ### Low Pass Filter
@@ -59,6 +66,7 @@ The output in combined delay systems doens' seem messy, and we have to apply a L
 In the end, we have our final delay time which looks like below:
 
 ![Delay](./delay.png)
+
 ![Delay](./delay_am.png)
 
 ## Optimization
