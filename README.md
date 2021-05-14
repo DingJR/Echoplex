@@ -10,15 +10,15 @@ Tape echoes work by recording sound on a magnetic tape, and playing back. The ta
 
 ## Echo Player System
 The main system flow of the echoplex is like below:
-![Echoplex System Flow](./echo_flow.jpg)
-![Echoplex](./gui.jpg)
+![Echoplex System Flow](./echo_flow.JPG)
+The final gui looks like this, we can use `TurnOn` and `TurnOff` to turn on the echoplex system or just output the input. And we can use `Volumn` to set the output volumn, `Sustain` to set the devaying degree of each echo and `delay` to determine the controlled delay.
+![Echoplex](./gui.JPG)
 
 ## Delay System
 And in order to completely simulate the real-word delay time, we use 3 parts to constrcut `Delay` function. The first part is basic contrled delay which set by user. The second part is sinusoid change which is introduced by capstan and pinch wheel(2 components of Echo Tape). And the third part is white gaussian noise which is caused by tensioner(componenet of Echo Tape) friction. The delay system is like below:
+![Delay System Flow](./delay_flow.JPG)
 
 
-The final gui looks like this, we can use `TurnOn` and `TurnOff` to turn on the echoplex system or just output the input. And we can use `Volumn` to set the output volumn, `Sustain` to set the devaying degree of each echo and `delay` to determine the controlled delay.
-![Delay System Flow](./delay_flow.jpg)
 
 ### Control Delay
 
