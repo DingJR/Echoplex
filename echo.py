@@ -37,8 +37,9 @@ class echo:
         @parameters: read x0 from input stream
         @return:     mixed output value
         '''
-        x = self.sustain * (self.interpolate(self.wr[0]) + self.interpolate(self.wr[1]) + self.interpolate(self.wr[2])) / 3 + input
-        y0 = self.gain * (self.interpolate(self.wr[0]) + self.interpolate(self.wr[1]) + self.interpolate(self.wr[2])) + input
+        echos = self.interpolate(self.wr[0]) + self.interpolate(self.wr[1]) + self.interpolate(self.wr[2])
+        x = self.sustain * echos / 3 + input
+        y0 = self.gain * echos      # output
         self.buffer[self.wr[3]] = x
         self.wr[3] = circlyBack(self.wr[3] + 1, self.BUFFER_LEN)
         for i in range(3):
